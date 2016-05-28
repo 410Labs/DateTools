@@ -301,12 +301,15 @@ static NSCalendar *implicitCalendar = nil;
 }
 
 - (NSString *) logicLocalizedStringFromFormat:(NSString *)format withValue:(NSInteger)value{
-    NSString * localeFormat = [NSString stringWithFormat:format, [self getLocaleFormatUnderscoresWithValue:value]];
+		NSString * formatUnderscores = [self getLocaleFormatUnderscoresWithValue:value];
+    NSString * localeFormat = [NSString stringWithFormat:format, formatUnderscores];
     return [NSString stringWithFormat:[NSDate localizedStringForKey:localeFormat], value];
 }
 
 - (NSString *)getLocaleFormatUnderscoresWithValue:(double)value{
-    NSString *localeCode = [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
+		NSArray *preferredLocalizations = [[NSBundle mainBundle] preferredLocalizations];
+		NSLog(@"preferred localizations: %@", preferredLocalizations);
+    NSString *localeCode = [preferredLocalizations objectAtIndex:0];
     
     // Russian (ru) and Ukrainian (uk)
     if([localeCode isEqualToString:@"ru"] || [localeCode isEqualToString:@"uk"]) {
