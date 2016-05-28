@@ -284,7 +284,6 @@ static NSCalendar *implicitCalendar = nil;
 }
 
 - (NSString *) logicLocalizedStringFromFormat:(NSString *)format withValue:(NSInteger)value{
-	  NSLog(@"looking up format %@ and value %d", format, value);
 		NSString * formatUnderscores = [self getLocaleFormatUnderscoresWithValue:value];
     NSString * localeFormat = [NSString stringWithFormat:format, formatUnderscores];
     return [NSString stringWithFormat:[NSDate localizedStringForKey:localeFormat], value];
@@ -292,7 +291,6 @@ static NSCalendar *implicitCalendar = nil;
 
 - (NSString *)getLocaleFormatUnderscoresWithValue:(double)value{
 		NSArray *preferredLocalizations = [[NSBundle mainBundle] preferredLocalizations];
-		NSLog(@"preferred localizations: %@", preferredLocalizations);
     NSString *localeCode = [preferredLocalizations objectAtIndex:0];
     
     // Russian (ru) and Ukrainian (uk)
@@ -1735,9 +1733,7 @@ static NSCalendar *implicitCalendar = nil;
     if (localizationBundle == nil) {
         NSLog(@"WARNING: DateTools localization unavailable, add %@ to project bundle", bundleFileName);
         return key;
-    }	 else {
-			  NSLog(@"located localization bundle, %@", localizationBundle);
-		}
+    }
     return NSLocalizedStringFromTableInBundle(key, @"DateTools", localizationBundle, nil);
 }
 
