@@ -1735,7 +1735,9 @@ static NSCalendar *implicitCalendar = nil;
     if (localizationBundle == nil) {
         NSLog(@"WARNING: DateTools localization unavailable, add %@ to project bundle", bundleFileName);
         return key;
-    }
+    }	 else {
+			  NSLog(@"located localization bundle, %@", localizationBundle);
+		}
     return NSLocalizedStringFromTableInBundle(key, @"DateTools", localizationBundle, nil);
 }
 
