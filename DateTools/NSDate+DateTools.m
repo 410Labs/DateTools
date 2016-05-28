@@ -65,23 +65,6 @@ static NSCalendar *implicitCalendar = nil;
 
 @implementation NSDate (DateTools)
 
-+ (NSString *)localizedStringForKey:(NSString *)key {
-    NSString *bundleFileName = @"DateTools.bundle";
-    NSBundle *errorBundle = [NSBundle bundleForClass:[DTError class]];
-		if (errorBundle == nil) {
-			NSLog(@"WARNING: cannot find parts of DateTools, be sure its bundle is properly installed");
-			return key;
-		}
-    NSString *path = [errorBundle resourcePath];
-    NSString *filePath = [path stringByAppendingPathComponent:bundleFileName];
-    NSBundle *localizationBundle = [NSBundle bundleWithPath:filePath];
-    if (localizationBundle == nil) {
-        NSLog(@"WARNING: DateTools localization unavailable, add %@ to project bundle", bundleFileName);
-        return key;
-    }
-    return NSLocalizedStringFromTableInBundle(key, @"DateTools", localizationBundle, nil);
-}
-
 + (void)load {
     [self setDefaultCalendarIdentifier:NSCalendarIdentifierGregorian];
 }
@@ -1738,6 +1721,24 @@ static NSCalendar *implicitCalendar = nil;
  *
  *  @return NSString - NSCalendarIdentifier
  */
+
++(NSString *)localizedStringForKey:(NSString *)key {
+    NSString *bundleFileName = @"DateTools.bundle";
+    NSBundle *errorBundle = [NSBundle bundleForClass:[DTError class]];
+		if (errorBundle == nil) {
+			NSLog(@"WARNING: cannot find parts of DateTools, be sure its bundle is properly installed");
+			return key;
+		}
+    NSString *path = [errorBundle resourcePath];
+    NSString *filePath = [path stringByAppendingPathComponent:bundleFileName];
+    NSBundle *localizationBundle = [NSBundle bundleWithPath:filePath];
+    if (localizationBundle == nil) {
+        NSLog(@"WARNING: DateTools localization unavailable, add %@ to project bundle", bundleFileName);
+        return key;
+    }
+    return NSLocalizedStringFromTableInBundle(key, @"DateTools", localizationBundle, nil);
+}
+
 +(NSString *)defaultCalendarIdentifier {
     return defaultCalendarIdentifier;
 }
