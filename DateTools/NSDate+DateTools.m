@@ -301,6 +301,7 @@ static NSCalendar *implicitCalendar = nil;
 }
 
 - (NSString *) logicLocalizedStringFromFormat:(NSString *)format withValue:(NSInteger)value{
+	  NSLog(@"looking up format %@ and value %d", format, value);
 		NSString * formatUnderscores = [self getLocaleFormatUnderscoresWithValue:value];
     NSString * localeFormat = [NSString stringWithFormat:format, formatUnderscores];
     return [NSString stringWithFormat:[NSDate localizedStringForKey:localeFormat], value];
