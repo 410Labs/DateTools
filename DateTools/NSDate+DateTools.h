@@ -25,6 +25,9 @@
 
 @interface NSDate (DateTools)
 
+#pragma mark - Utility Function
++ (NSString *)localizedStringForKey:(NSString *)key
+
 #pragma mark - Time Ago
 + (NSString*)timeAgoSinceDate:(NSDate*)date;
 + (NSString*)shortTimeAgoSinceDate:(NSDate*)date;
